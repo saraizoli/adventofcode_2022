@@ -25,7 +25,7 @@ public class Day03 extends Day {
     @Override
     public void getSolution1() {
         int sum = packs.stream()
-                .mapToInt(s -> findDupeWithSets(List.of(s.substring(0, s.length() / 2), s.substring(s.length() / 2))))
+                .mapToInt(s -> findIntersectionWithSets(List.of(s.substring(0, s.length() / 2), s.substring(s.length() / 2))))
                 .sum();
         System.out.println(sum);
     }
@@ -39,7 +39,7 @@ public class Day03 extends Day {
 //        return (dupeAscii - 65 + 27) % 58;
 //    }
 
-    private int findDupeWithSets(List<String> strings) {
+    private int findIntersectionWithSets(List<String> strings) {
         Set<Integer> intersection = strings.stream()
                 .map(s -> s.chars().boxed().collect(Collectors.toSet()))
                 .reduce((set1, set2) -> { set1.retainAll(set2); return set1; })
@@ -53,7 +53,7 @@ public class Day03 extends Day {
         int groupSize = 3;
         int sum = IntStream.range(0, packs.size() / groupSize)
                 .mapToObj(i -> packs.subList(i * groupSize, (i + 1) * groupSize))
-                .mapToInt(this::findDupeWithSets)
+                .mapToInt(this::findIntersectionWithSets)
                 .sum();
         System.out.println(sum);
     }
