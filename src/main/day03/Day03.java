@@ -30,7 +30,7 @@ public class Day03 extends Day {
         System.out.println(sum);
     }
 
-//
+//    naive direct approach
 //    private int findDupeWithSets(String s) {
 //        Set<Integer> left = s.substring(0, s.length() / 2).chars().boxed().collect(Collectors.toSet());
 //        Set<Integer> right = s.substring(s.length() / 2).chars().boxed().collect(Collectors.toSet());
@@ -40,7 +40,7 @@ public class Day03 extends Day {
 //    }
 
     private int findDupeWithSets(List<String> strings) {
-        Set<Integer> intersection =(strings).stream()
+        Set<Integer> intersection = strings.stream()
                 .map(s -> s.chars().boxed().collect(Collectors.toSet()))
                 .reduce((set1, set2) -> { set1.retainAll(set2); return set1; })
                 .orElse(Collections.emptySet());
@@ -52,14 +52,14 @@ public class Day03 extends Day {
     public void getSolution2() {
         int groupSize = 3;
         int sum = IntStream.range(0, packs.size() / groupSize)
-                .mapToObj(i -> packs.subList(i * groupSize, (i + 1)* groupSize))
+                .mapToObj(i -> packs.subList(i * groupSize, (i + 1) * groupSize))
                 .mapToInt(this::findDupeWithSets)
                 .sum();
         System.out.println(sum);
     }
 
-//        System.out.println(('a'-65+27)%58);
-//        System.out.println(('z'-65+27)%58);
-//        System.out.println(('A'-65+27)%58);
-//        System.out.println(('Z'-65+27)%58);
+//        System.out.println(('a'-65+27)%58); //1
+//        System.out.println(('z'-65+27)%58); //26
+//        System.out.println(('A'-65+27)%58); //27
+//        System.out.println(('Z'-65+27)%58); //52
 }
