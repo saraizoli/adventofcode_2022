@@ -1,6 +1,9 @@
 package main.utils;
 
-public abstract class Day {
+import java.util.function.Supplier;
+import java.util.stream.IntStream;
+
+public abstract class Day<T> {
     InputReader reader;
 
     public Day() {
@@ -11,6 +14,38 @@ public abstract class Day {
         return reader;
     }
 
-    public abstract void getSolution1();
-    public abstract void getSolution2();
+    public abstract T getSolution1();
+
+    public abstract T getSolution2();
+
+    public void printSolutionWithTime(int task, int repetition) {
+        Supplier<T> method = (task == 1) ? this::getSolution1 : this::getSolution2;
+
+        long start = System.nanoTime();
+        IntStream.range(0, repetition - 1).forEach(i -> method.get());
+        T solution = method.get();
+        long end = System.nanoTime();
+
+        double elapsedMillis = (end - start) / 1e6;
+        System.out.printf("Task %d:%n", task);
+        System.out.println(solution);
+        System.out.printf("Elapsed time total: %fms, avg run: %fms%n", elapsedMillis, elapsedMillis / repetition);
+        System.out.println();
+    }
+
+    public void printSolution1WithTime(int repetition){
+        printSolutionWithTime(1, repetition);
+    }
+
+    public void printSolution1WithTime(){
+        printSolutionWithTime(1, 1);
+    }
+
+    public void printSolution2WithTime(int repetition){
+        printSolutionWithTime(2, repetition);
+    }
+
+    public void printSolution2WithTime(){
+        printSolutionWithTime(2, 1);
+    }
 }

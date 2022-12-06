@@ -2,11 +2,10 @@ package main.day02;
 
 import main.utils.Day;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class Day02 extends Day {
+public class Day02 extends Day<Integer> {
 
     private final List<String> strat;
     static final Map<String, Integer> scoring1 = Map.of(
@@ -39,14 +38,14 @@ public class Day02 extends Day {
     }
 
     @Override
-    public void getSolution1() {
+    public Integer getSolution1() {
         int sum = strat.stream().mapToInt(scoring1::get).sum();
-        System.out.println(sum);
+        return sum;
     }
 
     @Override
-    public void getSolution2() {
+    public Integer getSolution2() {
         int sum = strat.stream().mapToInt(scoring2::get).sum();
-        System.out.println(sum);
+        return sum;
     }
 }

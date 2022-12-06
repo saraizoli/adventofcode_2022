@@ -2,7 +2,7 @@ package main.day06;
 
 import main.utils.Day;
 
-public class Day06 extends Day {
+public class Day06 extends Day<Integer> {
 
     private final String text;
 
@@ -11,20 +11,20 @@ public class Day06 extends Day {
     }
 
     @Override
-    public void getSolution1() {
-        solve(4);
+    public Integer getSolution1() {
+        return solve(4);
     }
 
-    private void solve(int length) {
+    private Integer solve(int length) {
         int i = length;
         while (text.substring(i - length, i).chars().distinct().count() < length) {
             ++i;
         }
-        System.out.println(i);
+        return i;
     }
 
     @Override
-    public void getSolution2() {
-        solve(14);
+    public Integer getSolution2() {
+        return solve(14);
     }
 }

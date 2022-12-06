@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class Day05 extends Day {
+public class Day05 extends Day<String> {
 
     private final List<LinkedList<Character>> initState;
     private final List<int[]> moves;
@@ -35,20 +35,19 @@ public class Day05 extends Day {
     }
 
     @Override
-    public void getSolution1() {
-        solve(true);
+    public String getSolution1() {
+        return solve(true);
     }
 
     @Override
-    public void getSolution2() {
-        solve(false);
+    public String getSolution2() {
+        return solve(false);
     }
 
-    private void solve(boolean reverse) {
+    private String solve(boolean reverse) {
         List<LinkedList<Character>> currState = initState.stream().map(LinkedList::new).collect(Collectors.toList());
         moves.forEach(move -> moveStack(currState, move, reverse));
-        currState.stream().map(s -> s.get(0)).forEach(System.out::print);
-        System.out.println();
+        return currState.stream().map(s -> s.get(0)).map(c -> "" + c).collect(Collectors.joining());
     }
 
     private void moveStack(List<LinkedList<Character>> stackState, int[] move, boolean reverse) {

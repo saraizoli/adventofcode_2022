@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Day04 extends Day {
+public class Day04 extends Day<Long> {
 
     private final List<List<Integer>> ranges;
 
@@ -27,14 +27,14 @@ public class Day04 extends Day {
     }
 
     @Override
-    public void getSolution1() {
+    public Long getSolution1() {
         long included = ranges.stream().filter(r -> (r.get(2) - r.get(0)) * (r.get(3) - r.get(1)) <= 0).count();
-        System.out.println(included);
+        return included;
     }
 
     @Override
-    public void getSolution2() {
+    public Long getSolution2() {
         long overlap = ranges.stream().filter(r -> (r.get(3) - r.get(0)) * (r.get(1) - r.get(2)) >= 0).count();
-        System.out.println(overlap);
+        return overlap;
     }
 }

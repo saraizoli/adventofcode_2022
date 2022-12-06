@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Day03 extends Day {
+public class Day03 extends Day<Integer> {
 
     private final List<String> packs;
 
@@ -23,11 +23,11 @@ public class Day03 extends Day {
     }
 
     @Override
-    public void getSolution1() {
+    public Integer getSolution1() {
         int sum = packs.stream()
                 .mapToInt(s -> findIntersectionWithSets(List.of(s.substring(0, s.length() / 2), s.substring(s.length() / 2))))
                 .sum();
-        System.out.println(sum);
+        return sum;
     }
 
 //    naive direct approach
@@ -49,13 +49,13 @@ public class Day03 extends Day {
     }
 
     @Override
-    public void getSolution2() {
+    public Integer getSolution2() {
         int groupSize = 3;
         int sum = IntStream.range(0, packs.size() / groupSize)
                 .mapToObj(i -> packs.subList(i * groupSize, (i + 1) * groupSize))
                 .mapToInt(this::findIntersectionWithSets)
                 .sum();
-        System.out.println(sum);
+        return sum;
     }
 
 //        System.out.println(('a'-65+27)%58); //1

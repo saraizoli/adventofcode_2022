@@ -5,11 +5,10 @@ import main.utils.Day;
 
 public class Main {
     public static void main(String[] args) {
-        Day day = new Day06();
-        System.out.println("Task 1:");
-        day.getSolution1();
-        System.out.println();
-        System.out.println("Task 2:");
-        day.getSolution2();
+        Day<?> day = new Day06();
+        day.printSolution1WithTime();
+        day.printSolution2WithTime();
+//        day.printSolution1WithTime(1000);
+//        day.printSolution2WithTime(1000);
     }
 }
