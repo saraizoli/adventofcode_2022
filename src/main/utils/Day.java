@@ -33,6 +33,17 @@ public abstract class Day<T> {
         System.out.println();
     }
 
+    public static void printConstructionTime(Supplier<? extends Day<?>> constr, int repetition) {
+
+        long start = System.nanoTime();
+        IntStream.range(0, repetition ).forEach(i -> constr.get());
+        long end = System.nanoTime();
+
+        double elapsedMillis = (end - start) / 1e6;
+        System.out.printf("Construction time total: %fms, avg run: %fms%n", elapsedMillis, elapsedMillis / repetition);
+        System.out.println();
+    }
+
     public void printSolution1WithTime(int repetition){
         printSolutionWithTime(1, repetition);
     }
