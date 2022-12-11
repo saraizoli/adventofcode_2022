@@ -7,7 +7,11 @@ import java.util.List;
 
 public class InputReader {
     public List<String> readAsStringList(int day){
-        URL url = getClass().getClassLoader().getResource(String.format("day%02d.txt", day));
+        return readAsStringList(String.format("day%02d.txt", day));
+    }
+
+    public List<String> readAsStringList(String fileName){
+        URL url = getClass().getClassLoader().getResource(fileName);
         try {
             File file = new File(url.toURI());
             return Files.readAllLines(file.toPath());
