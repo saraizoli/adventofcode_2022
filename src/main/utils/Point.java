@@ -1,6 +1,7 @@
 package main.utils;
 
 import java.util.Map;
+import java.util.stream.Stream;
 
 public record Point(int x, int y) {
     public static Point O = new Point(0, 0);
@@ -33,5 +34,13 @@ public record Point(int x, int y) {
 
     public int dist2(Point o) {
         return (x - o.x) * (x - o.x) + (y - o.y) * (y - o.y);
+    }
+
+    public Stream<Point> neighbours() {
+        return DIRS.values().stream().map(this::add);
+    }
+
+    public boolean isInRect(Point bottomLeft, Point topRight) {
+        return x >= bottomLeft.x && x < topRight.x && y >= bottomLeft.y && y < topRight.y;
     }
 }
