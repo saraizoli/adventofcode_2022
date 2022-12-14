@@ -3,6 +3,9 @@ package main.day14;
 import main.utils.Day;
 import main.utils.Point;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -54,7 +57,6 @@ public class Day14 extends Day<Integer> {
         Predicate<Point> keepCond = stopCond.negate();
         blocked = new HashSet<>(rocks);
 
-//        show();
         Point curr = S;
         while (keepCond.test(curr)) {
             Point next = nextPlace(curr);
@@ -65,7 +67,7 @@ public class Day14 extends Day<Integer> {
                 curr = next;
             }
         }
-//        show();
+        show(1);
         return blocked.size() - rocks.size();
     }
 
@@ -83,6 +85,7 @@ public class Day14 extends Day<Integer> {
         //setup
         LinkedList<Point> que = new LinkedList<>();
         blocked = new HashSet<>(rocks);
+        blocked.add(S);
         que.addLast(S);
 
         //iterate
@@ -98,23 +101,26 @@ public class Day14 extends Day<Integer> {
                         cnt[0]++;
                     });
         }
+        show(2);
         return cnt[0];
     }
 
 
-    private void show() {
+    private void show(int p) {
         int minX = blocked.stream().mapToInt(Point::x).min().orElse(0);
         int maxX = blocked.stream().mapToInt(Point::x).max().orElse(0);
-        for (int j = 0; j < maxY + 5; j++) {
-            for (int i = minX - 2; i < maxX + 2; i++) {
-                System.out.print(rocks.contains(new Point(i, j)) ? "█" : blocked.contains(new Point(i, j)) ? "░" : " ");
+        String fName = String.format("C:\\Dev\\workspace\\adventofcode_2022\\outFiles\\day14_part%d.txt", p);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fName))) {
+            writer.write("");
+            for (int j = 0; j < maxY + 2; j++) {
+                for (int i = minX - 2; i < maxX + 2; i++) {
+                    writer.append(rocks.contains(new Point(i, j)) ? "█" : blocked.contains(new Point(i, j)) ? "░" : " ");
+                }
+                writer.append('\n');
+
             }
-            System.out.println();
-
+        } catch (IOException e) {
+            throw new RuntimeException("uhoh");
         }
-
-        System.out.println();
-        System.out.println();
-        System.out.println();
     }
 }
