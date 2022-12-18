@@ -14,7 +14,7 @@ public record Point(int x, int y) {
     public static Point UL = new Point(-1, 1);
     public static Point UR = new Point(1, 1);
 
-    public static Map<String, Point> DIRS = Map.of("U", U, "D", D, "L", L, "R", R);
+    public static final Map<String, Point> DIRS = Map.of("U", U, "D", D, "L", L, "R", R, ">", R, "<", L);
 
     public static Point from(String s) {
         String[] t = s.split(",");
