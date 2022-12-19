@@ -57,7 +57,7 @@ public class Day16 extends Day<Integer> {
         Set<Set<Node>> subsets = getSubsets(relevant);
         int halfLength = relevant.size() / 2;
         //partition into 2 every possible way, run the algo on the partitions
-        return subsets.stream()
+        return subsets.parallelStream()
                 .filter(ss -> ss.size() <= halfLength) //this avoids double running each subset - complement pair
                 .mapToInt(ss -> {
                     HashSet<Node> compl = new HashSet<>(relevant);
