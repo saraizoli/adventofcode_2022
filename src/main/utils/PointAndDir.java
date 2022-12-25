@@ -1,6 +1,4 @@
-package main.day22;
-
-import main.utils.Point;
+package main.utils;
 
 public record PointAndDir(Point p, Point d) {
     public PointAndDir step(){

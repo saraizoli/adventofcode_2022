@@ -2,6 +2,7 @@ package main.day22;
 
 import main.utils.Day;
 import main.utils.Point;
+import main.utils.PointAndDir;
 
 import java.util.List;
 import java.util.Map;

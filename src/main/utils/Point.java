@@ -1,5 +1,6 @@
 package main.utils;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -14,6 +15,7 @@ public record Point(int x, int y) {
     public static Point UL = new Point(-1, 1);
     public static Point UR = new Point(1, 1);
 
+    private static final Point[] DIRSA = new Point[] {U, D, L, R};
     public static final Map<String, Point> DIRS = Map.of("U", U, "D", D, "L", L, "R", R, ">", R, "<", L);
 
     public static Point from(String s) {
@@ -50,7 +52,7 @@ public record Point(int x, int y) {
     }
 
     public Stream<Point> neighbours() {
-        return DIRS.values().stream().map(this::add);
+        return Arrays.stream(DIRSA).map(this::add);
     }
 
     public Stream<Point> fromTo(Point to) {
